@@ -1,3 +1,14 @@
+terraform {
+  backend "remote" {
+    # The name of your Terraform Cloud organization.
+    organization = "Akademia"
+    # The name of the Terraform Cloud workspace to store Terraform state files in.
+    workspaces {
+      name = "example-workspace"
+    }
+  }
+}
+
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-web-privateLinkOrigin"
   location = "westeurope"
