@@ -91,9 +91,8 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
-    
-    terraform-destroy:
-    needs: terraform-apply
+  terraform-destroy:
+    needs: terraform
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     environment: production
