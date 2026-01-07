@@ -1,5 +1,5 @@
 variable "prefix" {
   description = "The prefix which should be used for all resources in this example"
   type        = string
-  default     = "add2"
+  default     = "add3"
 }
