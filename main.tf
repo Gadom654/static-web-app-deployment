@@ -9,15 +9,12 @@ terraform {
   }
 }
 
+data "azurerm_client_config" "current" {}
+
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-web-privateLinkOrigin"
   location = "westeurope"
 }
-
-data "http" "my_public_ip" {
-  url = "https://ifconfig.me/ip"
-}
-
 
 resource "azurerm_storage_account" "example" {
   name                     = "${var.prefix}sa"
@@ -28,8 +25,7 @@ resource "azurerm_storage_account" "example" {
   account_kind             = "StorageV2"
 
   network_rules {
-    default_action = "Deny"
-    ip_rules       = [data.http.my_public_ip.response_body]
+    default_action = "Allow"
   }
 
   static_website {
@@ -55,7 +51,6 @@ resource "azurerm_cdn_frontdoor_profile" "example" {
   name                     = "${var.prefix}-profile"
   resource_group_name      = azurerm_resource_group.example.name
   sku_name                 = "Premium_AzureFrontDoor"
-  depends_on               = [azurerm_storage_account.example]
   response_timeout_seconds = 120
 
   tags = {
@@ -94,6 +89,7 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
   name                          = "${var.prefix}-origin"
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.example.id
   enabled                       = true
+  depends_on                    = [azurerm_storage_blob.example]
 
   certificate_name_check_enabled = true # Required for Private Link
   host_name                      = azurerm_storage_account.example.primary_web_host
