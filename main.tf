@@ -28,6 +28,14 @@ resource "azurerm_storage_account_static_website" "example" {
   index_document     = "index.html"
 }
 
+resource "azurerm_storage_blob" "example" {
+  name                   = "index.html"
+  storage_account_name   = azurerm_storage_account.example.name
+  storage_container_name = "$web"
+  type                   = "Block"
+  source                 = "./app/index.html"
+}
+
 resource "azurerm_cdn_frontdoor_profile" "example" {
   name                = "${var.prefix}-profile"
   resource_group_name = azurerm_resource_group.example.name
@@ -85,3 +93,4 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
     private_link_target_id = azurerm_storage_account.example.id
   }
 }
+
