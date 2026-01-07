@@ -17,4 +17,5 @@ provider "http" {
 provider "azurerm" {
   resource_provider_registrations = "none"
   features {}
+  use_cli = false
 }
