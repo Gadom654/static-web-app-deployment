@@ -86,7 +86,8 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
-
+    - name: Diagnostic Step
+      run: echo "ID subskrypcji ma długość: ${#ARM_SUBSCRIPTION_ID}"
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
