@@ -9,12 +9,9 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  account_kind             = "StorageV2"
-
-  allow_nested_items_to_be_public = false
 
   network_rules {
-    default_action = "Deny"
+    default_action = "Allow"
   }
 
   tags = {
@@ -34,13 +31,14 @@ resource "azurerm_storage_blob" "example" {
   storage_container_name = "$web"
   type                   = "Block"
   source                 = "./app/index.html"
+  depends_on = [azurerm_storage_account_static_website.example]
 }
 
 resource "azurerm_cdn_frontdoor_profile" "example" {
   name                = "${var.prefix}-profile"
   resource_group_name = azurerm_resource_group.example.name
   sku_name            = "Premium_AzureFrontDoor"
-
+  depends_on = [azurerm_storage_account_static_website.example]
   response_timeout_seconds = 120
 
   tags = {
