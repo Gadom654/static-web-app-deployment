@@ -3,26 +3,32 @@ resource "azurerm_resource_group" "example" {
   location = "westeurope"
 }
 
+data "http" "my_public_ip" {
+  url = "https://ifconfig.me/ip"
+}
+
+
 resource "azurerm_storage_account" "example" {
   name                     = "${var.prefix}sa"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  account_kind             = "StorageV2"
 
   network_rules {
-    default_action = "Allow"
+    default_action = "Deny"
+    ip_rules       = [data.http.my_public_ip.response_body]
+  }
+
+  static_website {
+    index_document     = "index.html"
+    error_404_document = "404.html"
   }
 
   tags = {
     environment = "example"
   }
-}
-
-resource "azurerm_storage_account_static_website" "example" {
-  storage_account_id = azurerm_storage_account.example.id
-  error_404_document = "not_found.html"
-  index_document     = "index.html"
 }
 
 resource "azurerm_storage_blob" "example" {
@@ -31,14 +37,14 @@ resource "azurerm_storage_blob" "example" {
   storage_container_name = "$web"
   type                   = "Block"
   source                 = "./app/index.html"
-  depends_on = [azurerm_storage_account_static_website.example]
+  content_type           = "text/html"
 }
 
 resource "azurerm_cdn_frontdoor_profile" "example" {
   name                = "${var.prefix}-profile"
   resource_group_name = azurerm_resource_group.example.name
   sku_name            = "Premium_AzureFrontDoor"
-  depends_on = [azurerm_storage_account_static_website.example]
+  depends_on = [azurerm_storage_account.example]
   response_timeout_seconds = 120
 
   tags = {
@@ -91,4 +97,3 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
     private_link_target_id = azurerm_storage_account.example.id
   }
 }
-
