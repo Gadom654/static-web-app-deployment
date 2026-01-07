@@ -41,10 +41,10 @@ resource "azurerm_storage_blob" "example" {
 }
 
 resource "azurerm_cdn_frontdoor_profile" "example" {
-  name                = "${var.prefix}-profile"
-  resource_group_name = azurerm_resource_group.example.name
-  sku_name            = "Premium_AzureFrontDoor"
-  depends_on = [azurerm_storage_account.example]
+  name                     = "${var.prefix}-profile"
+  resource_group_name      = azurerm_resource_group.example.name
+  sku_name                 = "Premium_AzureFrontDoor"
+  depends_on               = [azurerm_storage_account.example]
   response_timeout_seconds = 120
 
   tags = {

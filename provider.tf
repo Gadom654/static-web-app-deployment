@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "~> 4.56.0"
     }
     http = {
@@ -15,6 +15,6 @@ provider "http" {
 }
 
 provider "azurerm" {
-  resource_provider_registrations = "none"  
+  resource_provider_registrations = "none"
   features {}
 }
