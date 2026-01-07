@@ -9,8 +9,6 @@ terraform {
   }
 }
 
-data "azurerm_client_config" "current" {}
-
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-cdn-frontdoor-web-privateLinkOrigin"
   location = "westeurope"
