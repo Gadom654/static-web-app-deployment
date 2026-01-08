@@ -1,7 +1,7 @@
 resource "azurerm_cdn_frontdoor_profile" "example" {
   name                     = "${var.prefix}-profile"
   resource_group_name      = var.resource_group_name
-  sku_name                 = "Premium_AzureFrontDoor"
+  sku_name                 = "Standard_AzureFrontDoor"
   response_timeout_seconds = 120
 
   tags = var.tags
@@ -46,12 +46,6 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
   priority                       = 1
   weight                         = 500
 
-  private_link {
-    request_message        = "Request access for CDN Frontdoor Private Link Origin Storage Account Static Site Example"
-    target_type            = "web"
-    location               = var.location
-    private_link_target_id = var.storage_account_id
-  }
 }
 
 resource "azurerm_cdn_frontdoor_route" "example" {
@@ -66,10 +60,4 @@ resource "azurerm_cdn_frontdoor_route" "example" {
   patterns_to_match      = ["/*"]
   supported_protocols    = ["Http", "Https"]
 
-  cache {
-    query_string_caching_behavior = "IgnoreSpecifiedQueryStrings"
-    query_strings                 = ["account", "settings"]
-    compression_enabled           = true
-    content_types_to_compress     = ["text/html", "text/javascript", "text/xml"]
-  }
 }
