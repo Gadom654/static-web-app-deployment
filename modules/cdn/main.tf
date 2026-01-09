@@ -82,7 +82,7 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
     name                           = "RateLimitRule"
     type                           = "RateLimitRule"
     enabled                        = true
-    priority                       = 100
+    priority                       = 1000
     action                         = "Block"
     rate_limit_duration_in_minutes = 1
     rate_limit_threshold           = 100
