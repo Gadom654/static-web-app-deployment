@@ -69,7 +69,7 @@ resource "azurerm_cdn_frontdoor_route" "example" {
 
 # Azure Front Door WAF Policy with Rate Limiting
 resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
-  name                = "${var.prefix}-waf-policy"
+  name                = "${var.prefix}wafpolicy"
   mode                = local.WAF_MODE
   resource_group_name = var.resource_group_name
   sku_name            = azurerm_cdn_frontdoor_profile.example.sku_name
