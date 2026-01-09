@@ -1,3 +1,4 @@
+# Azure Front Door Profile
 resource "azurerm_cdn_frontdoor_profile" "example" {
   name                     = "${var.prefix}-profile"
   resource_group_name      = var.resource_group_name
@@ -7,6 +8,16 @@ resource "azurerm_cdn_frontdoor_profile" "example" {
   tags = var.tags
 }
 
+# Azure Front Door Endpoint
+resource "azurerm_cdn_frontdoor_endpoint" "example" {
+  name                     = "${var.prefix}-endpoint"
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.example.id
+  enabled                  = true
+
+  tags = var.tags
+}
+
+# Azure Front Door Origin Group
 resource "azurerm_cdn_frontdoor_origin_group" "example" {
   name                                                      = "${var.prefix}-origin-group"
   cdn_frontdoor_profile_id                                  = azurerm_cdn_frontdoor_profile.example.id
@@ -27,16 +38,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "example" {
   }
 }
 
-# Front Door Endpoint
-resource "azurerm_cdn_frontdoor_endpoint" "example" {
-  name                     = "${var.prefix}-endpoint"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.example.id
-  enabled                  = true
-
-  tags = var.tags
-}
-
-# Origin pointing to the Static Web App
+# Azure Front Door Origin pointing to the Static Web App
 resource "azurerm_cdn_frontdoor_origin" "example" {
   name                          = "${var.prefix}-origin"
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.example.id
@@ -50,7 +52,7 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
 
 }
 
-# CDN Route to map requests to the Static Web App origin
+# Azure Front Door Route to map requests to the Static Web App origin
 resource "azurerm_cdn_frontdoor_route" "example" {
   name                          = "${var.prefix}-example-route"
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.example.id
@@ -63,4 +65,32 @@ resource "azurerm_cdn_frontdoor_route" "example" {
   patterns_to_match      = ["/*"]
   supported_protocols    = ["Http", "Https"]
 
+}
+
+# Azure Front Door WAF Policy with Rate Limiting
+resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
+  name                = "${var.prefix}-waf-policy"
+  mode                = local.WAF_MODE
+  resource_group_name = var.resource_group_name
+  sku_name            = azurerm_cdn_frontdoor_profile.example.sku_name
+  enabled             = true
+
+  tags = var.tags
+
+  custom_rule {
+    name                           = "RateLimitRule"
+    type                           = "RateLimit"
+    enabled                        = true
+    priority                       = 1000
+    action                         = "Block"
+    rate_limit_duration_in_minutes = 1
+    rate_limit_threshold           = 100
+
+    match_condition {
+      match_variable     = "RemoteAddr"
+      operator           = "IPMatch"
+      negation_condition = false
+      match_values       = ["*"]
+    }
+  }
 }
