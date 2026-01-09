@@ -41,6 +41,7 @@ jobs:
     name: "Terraform Plan"
     needs: init_and_lint
     runs-on: ubuntu-latest
+    environment: plan
     env:
       ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID_PLAN }}
       ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
