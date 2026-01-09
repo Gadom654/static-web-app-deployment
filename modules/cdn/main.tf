@@ -79,7 +79,7 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
 
   custom_rule {
     name                           = "RateLimitRule"
-    type                           = "RateLimit"
+    type                           = "MatchRule"
     enabled                        = true
     priority                       = 1000
     action                         = "Block"
