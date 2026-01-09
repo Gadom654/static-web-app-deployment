@@ -27,6 +27,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "example" {
   }
 }
 
+# Front Door Endpoint
 resource "azurerm_cdn_frontdoor_endpoint" "example" {
   name                     = "${var.prefix}-endpoint"
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.example.id
@@ -35,6 +36,7 @@ resource "azurerm_cdn_frontdoor_endpoint" "example" {
   tags = var.tags
 }
 
+# Origin pointing to the Static Web App
 resource "azurerm_cdn_frontdoor_origin" "example" {
   name                          = "${var.prefix}-origin"
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.example.id
@@ -48,6 +50,7 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
 
 }
 
+# CDN Route to map requests to the Static Web App origin
 resource "azurerm_cdn_frontdoor_route" "example" {
   name                          = "${var.prefix}-example-route"
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.example.id
