@@ -75,7 +75,7 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
   sku_name                          = azurerm_cdn_frontdoor_profile.example.sku_name
   enabled                           = true
   custom_block_response_status_code = 403
-  custom_block_response_body = "Access denied due to rate limiting. Please try again later."
+  custom_block_response_body        = "Access denied due to rate limiting. Please try again later."
 
   tags = var.tags
 
