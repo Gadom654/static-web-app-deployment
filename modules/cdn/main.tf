@@ -69,19 +69,20 @@ resource "azurerm_cdn_frontdoor_route" "example" {
 
 # Azure Front Door WAF Policy with Rate Limiting
 resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
-  name                = "${var.prefix}wafpolicy"
-  mode                = local.WAF_MODE
-  resource_group_name = var.resource_group_name
-  sku_name            = azurerm_cdn_frontdoor_profile.example.sku_name
-  enabled             = true
+  name                              = "${var.prefix}wafpolicy"
+  mode                              = local.WAF_MODE
+  resource_group_name               = var.resource_group_name
+  sku_name                          = azurerm_cdn_frontdoor_profile.example.sku_name
+  enabled                           = true
+  custom_block_response_status_code = 403
 
   tags = var.tags
 
   custom_rule {
     name                           = "RateLimitRule"
-    type                           = "MatchRule"
+    type                           = "RateLimitRule"
     enabled                        = true
-    priority                       = 1000
+    priority                       = 100
     action                         = "Block"
     rate_limit_duration_in_minutes = 1
     rate_limit_threshold           = 100
@@ -91,6 +92,24 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
       operator           = "IPMatch"
       negation_condition = false
       match_values       = ["0.0.0.0/0", "::/0"]
+    }
+  }
+}
+
+# Azure Front Door Security Policy
+resource "azurerm_cdn_frontdoor_security_policy" "FDRateLimitPolicy" {
+  name                     = "${var.prefix}-security-policy"
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.example.id
+
+  security_policies {
+    firewall {
+      cdn_frontdoor_firewall_policy_id = azurerm_cdn_frontdoor_firewall_policy.RateLimitPolicy.id
+      association {
+        domain {
+          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_endpoint.example.id
+        }
+        patterns_to_match = ["/*"]
+      }
     }
   }
 }
