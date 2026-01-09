@@ -90,7 +90,7 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "RateLimitPolicy" {
       match_variable     = "RemoteAddr"
       operator           = "IPMatch"
       negation_condition = false
-      match_values       = ["*"]
+      match_values       = ["0.0.0.0/0", "::/0"]
     }
   }
 }
