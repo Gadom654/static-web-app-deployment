@@ -38,7 +38,7 @@ resource "azurerm_portal_dashboard" "adf_dashboard" {
   tags                = var.tags
   location            = var.location
 
-  dashboard_properties = templatefile("./dashboard.json", {
+  dashboard_properties = templatefile("./modules/monitoring/dashboard.json", {
     front_door_id = var.afd_profile_id
     location      = var.location
   })
