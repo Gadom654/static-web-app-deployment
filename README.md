@@ -1,4 +1,4 @@
-# Azure Static Web Hosting
+# Azure Static Web Hosting App version 1.2.0
 
 A modular Terraform project deploying a globally distributed static website using Azure Storage for origin hosting and Azure Front Door (CDN) for edge acceleration, security, and SSL.
 
@@ -33,3 +33,7 @@ terraform plan – Previews the infrastructure changes and validates your config
 terraform apply – Provisions the Azure resources and outputs your site URL.
 
 Verify – Open the Front Door endpoint in your browser to see your live site.
+
+## Changelog
+Version 1.2:
+    - added error handling for 404 and 5xx error pages
