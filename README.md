@@ -35,6 +35,8 @@ terraform apply – Provisions the Azure resources and outputs your site URL.
 Verify – Open the Front Door endpoint in your browser to see your live site.
 
 ## Changelog
+Version 1.3.0:
+    - added monitoring
 Version 1.2.1:
     - changed health probe from http to https to resolve problem with origin host switch.
 Version 1.2.0:
