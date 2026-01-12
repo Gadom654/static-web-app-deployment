@@ -35,3 +35,15 @@ variable "storage_primary_web_host" {
   type        = string
   description = "The primary web host of the Storage Account"
 }
+
+## New variable for the Error Storage Account ID
+variable "error_storage_account_id" {
+  type        = string
+  description = "The ID of the Error Storage Account"
+}
+
+## New variable for the Error Storage Account primary web host
+variable "error_storage_web_host" {
+  type        = string
+  description = "The primary web host of the Error Storage Account"
+}

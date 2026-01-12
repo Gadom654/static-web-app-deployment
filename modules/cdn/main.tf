@@ -52,6 +52,21 @@ resource "azurerm_cdn_frontdoor_origin" "example" {
 
 }
 
+# Azure Front Door Origin pointing to the Static Web App Error Origin
+resource "azurerm_cdn_frontdoor_origin" "errororigin" {
+  name                          = "${var.prefix}-errororigin"
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.example.id
+  enabled                       = true
+
+  certificate_name_check_enabled = true # Required for Private Link
+  host_name                      = var.error_storage_web_host
+  origin_host_header             = var.error_storage_web_host
+  priority                       = 2
+  weight                         = 500
+
+}
+
+
 # Azure Front Door Route to map requests to the Static Web App origin
 resource "azurerm_cdn_frontdoor_route" "example" {
   name                          = "${var.prefix}-example-route"

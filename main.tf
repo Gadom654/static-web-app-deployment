@@ -20,6 +20,8 @@ module "cdn" {
   location                 = var.location
   resource_group_name      = azurerm_resource_group.example.name
   tags                     = var.tags
-  storage_account_id       = module.storage.id
+  storage_account_id       = module.storage.main_storage_account_id
   storage_primary_web_host = module.storage.primary_web_host
+  error_storage_account_id = module.storage.error_storage_account_id
+  error_storage_web_host   = module.storage.error_web_host
 }
