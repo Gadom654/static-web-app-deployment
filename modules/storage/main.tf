@@ -80,6 +80,6 @@ resource "azurerm_storage_blob" "nferrorpage" {
   storage_account_name   = azurerm_storage_account.errorstorage.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "./app/404.html"
+  source                 = "./app/5xx.html"
   content_type           = "text/html"
 }

@@ -66,7 +66,6 @@ resource "azurerm_cdn_frontdoor_origin" "errororigin" {
 
 }
 
-
 # Azure Front Door Route to map requests to the Static Web App origin
 resource "azurerm_cdn_frontdoor_route" "example" {
   name                          = "${var.prefix}-example-route"
