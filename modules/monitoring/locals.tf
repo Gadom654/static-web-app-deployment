@@ -6,4 +6,5 @@ locals {
   fdac                 = "FrontDoorAccessLog"
   fdwaf                = "FrontDoorWebApplicationFirewallLog"
   metrics_scope        = "AllMetrics"
+  dashboard_name       = "${var.prefix}-afd-monitoring-dashboard"
 }

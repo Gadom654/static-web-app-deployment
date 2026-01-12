@@ -10,6 +10,7 @@ resource "azurerm_log_analytics_workspace" "monitoring" {
 
 }
 
+# Create Diagnostic Setting for AFD Profile
 resource "azurerm_monitor_diagnostic_setting" "afd_diagnostics" {
   name                       = local.afd_diagnostics_name
   target_resource_id         = var.afd_profile_id
@@ -28,6 +29,19 @@ resource "azurerm_monitor_diagnostic_setting" "afd_diagnostics" {
   enabled_metric {
     category = local.metrics_scope
   }
+
+}
+
+resource "azurerm_portal_dashboard" "adf_dashboard" {
+  name                = local.dashboard_name
+  resource_group_name = var.resource_group_name
+  tags                = var.tags
+  location            = var.location
+
+  dashboard_properties = templatefile("dashboard.json", {
+    front_door_id = var.afd_profile_id
+    location      = var.location
+  })
 
 }
 
