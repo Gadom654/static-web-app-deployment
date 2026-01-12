@@ -22,7 +22,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "example" {
   name                                                      = "${var.prefix}-origin-group"
   cdn_frontdoor_profile_id                                  = azurerm_cdn_frontdoor_profile.example.id
   session_affinity_enabled                                  = false
-  restore_traffic_time_to_healed_or_new_endpoint_in_minutes = 10
+  restore_traffic_time_to_healed_or_new_endpoint_in_minutes = 1
 
   health_probe {
     interval_in_seconds = 2
