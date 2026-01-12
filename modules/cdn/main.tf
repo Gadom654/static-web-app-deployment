@@ -27,7 +27,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "example" {
   health_probe {
     interval_in_seconds = 100
     path                = "/"
-    protocol            = "Http"
+    protocol            = "Https"
     request_type        = "HEAD"
   }
 
