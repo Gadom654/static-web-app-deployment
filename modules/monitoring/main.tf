@@ -7,7 +7,7 @@ resource "azurerm_log_analytics_workspace" "monitoring" {
   retention_in_days   = local.law_retention_days
 
   tags = var.tags
-  
+
 }
 
 resource "azurerm_monitor_diagnostic_setting" "afd_diagnostics" {
@@ -28,6 +28,6 @@ resource "azurerm_monitor_diagnostic_setting" "afd_diagnostics" {
   enabled_metric {
     category = local.metrics_scope
   }
-  
+
 }
 
