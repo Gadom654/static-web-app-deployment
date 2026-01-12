@@ -1,219 +1,82 @@
 {
-  "properties": {
-    "lenses": [
-      { "order": 0,
-        "parts": [
-            {
-                "position": { "x": 0, "y": 0, "colSpan": 6, "rowSpan": 4 },
-                "metadata": {
-                    "inputs": [
-                        { "name": "options", "isOptional": true },
-                        { "name": "sharedTimeRange", "isOptional": true }
+  "lenses": {
+    "0": {
+      "order": 0,
+      "parts": {
+        "0": {
+          "position": { "x": 0, "y": 0, "colSpan": 6, "rowSpan": 4 },
+          "metadata": {
+            "inputs": [
+              { "name": "options", "isOptional": true },
+              { "name": "sharedTimeRange", "isOptional": true }
+            ],
+            "type": "Extension/HubsExtension/PartType/MonitorChartPart",
+            "settings": {
+              "content": {
+                "options": {
+                  "chart": {
+                    "metrics": [
+                      {
+                        "resourceMetadata": { "id": "${front_door_id}" },
+                        "name": "RequestCount",
+                        "aggregationType": 1,
+                        "namespace": "microsoft.cdn/profiles",
+                        "metricVisualization": { "displayName": "Request Count" }
+                      }
                     ],
-                    "type": "Extension/HubsExtension/PartType/MonitorChartPart",
-                    "settings": {
-                        "content": {
-                            "options": {
-                                "chart": {
-                                    "metrics": [
-                                        {
-                                            "resourceMetadata": {
-                                                "id": "/subscriptions/ad8dddbf-667c-4315-b894-36323592861e/resourceGroups/addterraform2-cdn-frontdoor-web-privateLinkOrigin/providers/Microsoft.Cdn/profiles/addterraform2-profile"
-                                            },
-                                            "name": "RequestCount",
-                                            "aggregationType": 1,
-                                            "namespace": "microsoft.cdn/profiles",
-                                            "metricVisualization": {
-                                                "displayName": "Request Count",
-                                                "resourceDisplayName": "addterraform2-profile"
-                                            }
-                                        }
-                                    ],
-                                    "title": "Sum Request Count for addterraform2-profile",
-                                    "titleKind": 1,
-                                    "visualization": {
-                                        "chartType": 2,
-                                        "legendVisualization": {
-                                            "isVisible": true,
-                                            "position": 2,
-                                            "hideHoverCard": false,
-                                            "hideLabelNames": true
-                                        },
-                                        "axisVisualization": {
-                                            "x": { "isVisible": true, "axisType": 2 },
-                                            "y": { "isVisible": true, "axisType": 1 }
-                                        },
-                                        "disablePinning": true
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "title": "Total Requests",
+                    "titleKind": 1,
+                    "visualization": { "chartType": 2 }
+                  }
                 }
-            },
-            {
-                "position": { "x": 6, "y": 0, "colSpan": 6, "rowSpan": 4 },
-                "metadata": {
-                    "inputs": [
-                        { "name": "options", "isOptional": true },
-                        { "name": "sharedTimeRange", "isOptional": true }
-                    ],
-                    "type": "Extension/HubsExtension/PartType/MonitorChartPart",
-                    "settings": {
-                        "content": {
-                            "options": {
-                                "chart": {
-                                    "metrics": [
-                                        {
-                                            "resourceMetadata": {
-                                                "id": "/subscriptions/ad8dddbf-667c-4315-b894-36323592861e/resourceGroups/addterraform2-cdn-frontdoor-web-privateLinkOrigin/providers/Microsoft.Cdn/profiles/addterraform2-profile"
-                                            },
-                                            "name": "Percentage4XX",
-                                            "aggregationType": 4,
-                                            "namespace": "microsoft.cdn/profiles",
-                                            "metricVisualization": {
-                                                "displayName": "Percentage of 4XX",
-                                                "resourceDisplayName": "addterraform2-profile"
-                                            }
-                                        },
-                                        {
-                                            "resourceMetadata": {
-                                                "id": "/subscriptions/ad8dddbf-667c-4315-b894-36323592861e/resourceGroups/addterraform2-cdn-frontdoor-web-privateLinkOrigin/providers/Microsoft.Cdn/profiles/addterraform2-profile"
-                                            },
-                                            "name": "Percentage5XX",
-                                            "aggregationType": 4,
-                                            "namespace": "microsoft.cdn/profiles",
-                                            "metricVisualization": {
-                                                "displayName": "Percentage of 5XX",
-                                                "resourceDisplayName": "addterraform2-profile"
-                                            }
-                                        }
-                                    ],
-                                    "title": "Avg Percentage of 4XX and Avg Percentage of 5XX for addterraform2-profile",
-                                    "titleKind": 1,
-                                    "visualization": {
-                                        "chartType": 2,
-                                        "legendVisualization": {
-                                            "isVisible": true,
-                                            "position": 2,
-                                            "hideHoverCard": false,
-                                            "hideLabelNames": true
-                                        },
-                                        "axisVisualization": {
-                                            "x": { "isVisible": true, "axisType": 2 },
-                                            "y": { "isVisible": true, "axisType": 1 }
-                                        },
-                                        "disablePinning": true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                "position": { "x": 12, "y": 0, "colSpan": 6, "rowSpan": 4 },
-                "metadata": {
-                    "inputs": [
-                        { "name": "options", "isOptional": true },
-                        { "name": "sharedTimeRange", "isOptional": true }
-                    ],
-                    "type": "Extension/HubsExtension/PartType/MonitorChartPart",
-                    "settings": {
-                        "content": {
-                            "options": {
-                                "chart": {
-                                    "metrics": [
-                                        {
-                                            "resourceMetadata": {
-                                                "id": "/subscriptions/ad8dddbf-667c-4315-b894-36323592861e/resourceGroups/addterraform2-cdn-frontdoor-web-privateLinkOrigin/providers/Microsoft.Cdn/profiles/addterraform2-profile"
-                                            },
-                                            "name": "WebApplicationFirewallRequestCount",
-                                            "aggregationType": 1,
-                                            "namespace": "microsoft.cdn/profiles",
-                                            "metricVisualization": {
-                                                "displayName": "Web Application Firewall Request Count",
-                                                "resourceDisplayName": "addterraform2-profile"
-                                            }
-                                        }
-                                    ],
-                                    "title": "Sum Web Application Firewall Request Count for addterraform2-profile where Rule Name = 'RateLimitRule'",
-                                    "titleKind": 1,
-                                    "visualization": {
-                                        "chartType": 2,
-                                        "legendVisualization": {
-                                            "isVisible": true,
-                                            "position": 2,
-                                            "hideHoverCard": false,
-                                            "hideLabelNames": true
-                                        },
-                                        "axisVisualization": {
-                                            "x": { "isVisible": true, "axisType": 2 },
-                                            "y": { "isVisible": true, "axisType": 1 }
-                                        },
-                                        "disablePinning": true
-                                    },
-                                    "filterCollection": {
-                                        "filters": [
-                                            { "key": "RuleName", "operator": 0, "values": ["RateLimitRule"] }
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "filters": {
-                        "RuleName": {
-                            "model": { "operator": "equals", "values": ["RateLimitRule"] }
-                        }
-                    }
-                }
+              }
             }
-        ]
-      }
-    ],
-    "metadata": {
-      "model": {
-        "timeRange": {
-          "value": {
-            "relative": {
-              "duration": 24,
-              "timeUnit": 1
-            }
-          },
-          "type": "MsPortalFx.Composition.Configuration.ValueTypes.TimeRange"
+          }
         },
-        "filterLocale": {
-          "value": "en-us"
-        },
-        "filters": {
-          "value": {
-            "MsPortalFx_TimeRange": {
-              "model": {
-                "format": "utc",
-                "granularity": "auto",
-                "relative": "24h"
-              },
-              "displayCache": {
-                "name": "UTC Time",
-                "value": "Past 24 hours"
-              },
-              "filteredPartIds": [
-                "StartboardPart-MonitorChartPart-9a5125c8-9385-4551-879f-d9fcf15e51fa",
-                "StartboardPart-MonitorChartPart-9a5125c8-9385-4551-879f-d9fcf15e520d",
-                "StartboardPart-MonitorChartPart-9a5125c8-9385-4551-879f-d9fcf15e5219"
-              ]
+        "1": {
+          "position": { "x": 6, "y": 0, "colSpan": 6, "rowSpan": 4 },
+          "metadata": {
+            "inputs": [
+              { "name": "options", "isOptional": true },
+              { "name": "sharedTimeRange", "isOptional": true }
+            ],
+            "type": "Extension/HubsExtension/PartType/MonitorChartPart",
+            "settings": {
+              "content": {
+                "options": {
+                  "chart": {
+                    "metrics": [
+                      {
+                        "resourceMetadata": { "id": "${front_door_id}" },
+                        "name": "Percentage4XX",
+                        "aggregationType": 4,
+                        "namespace": "microsoft.cdn/profiles"
+                      },
+                      {
+                        "resourceMetadata": { "id": "${front_door_id}" },
+                        "name": "Percentage5XX",
+                        "aggregationType": 4,
+                        "namespace": "microsoft.cdn/profiles"
+                      }
+                    ],
+                    "title": "4xx and 5xx Rates",
+                    "titleKind": 1,
+                    "visualization": { "chartType": 2 }
+                  }
+                }
+              }
             }
           }
         }
       }
     }
   },
-  "name": "AFD_Dashboard",
-  "type": "Microsoft.Portal/dashboards",
-  "location": "INSERT LOCATION",
-  "tags": {
-    "hidden-title": "AFD_Dashboard"
-  },
-  "apiVersion": "2022-12-01-preview"
+  "metadata": {
+    "model": {
+      "timeRange": {
+        "value": { "relative": { "duration": 24, "timeUnit": 1 } },
+        "type": "MsPortalFx.Composition.Configuration.ValueTypes.TimeRange"
+      }
+    }
+  }
 }
