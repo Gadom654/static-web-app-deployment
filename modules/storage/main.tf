@@ -32,7 +32,7 @@ resource "azurerm_storage_blob" "mainpage" {
 }
 
 # Azure Storage Blob for 404.html
-resource "azurerm_storage_blob" "404errorpage" {
+resource "azurerm_storage_blob" "mainerrorpage" {
   name                   = "404.html"
   storage_account_name   = azurerm_storage_account.mainstorage.name
   storage_container_name = "$web"
@@ -75,7 +75,7 @@ resource "azurerm_storage_blob" "originerrorpage" {
 }
 
 # Azure Storage Blob for 404.html
-resource "azurerm_storage_blob" "404errorpage" {
+resource "azurerm_storage_blob" "nferrorpage" {
   name                   = "404.html"
   storage_account_name   = azurerm_storage_account.errorstorage.name
   storage_container_name = "$web"
